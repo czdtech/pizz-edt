@@ -224,7 +224,7 @@ export default function GamePage({ params }: GamePageProps) {
             </div>
 
             {/* Game Frame */}
-            <GameFrame gameUrl={game.iframeUrl} title={game.title} />
+            <GameFrame gameUrl={game.iframeUrl} title={game.title} coverImage={game.coverImage} />
 
             {/* Game Description */}
             <div className="mt-8 bg-white rounded-2xl p-6 shadow-sm">

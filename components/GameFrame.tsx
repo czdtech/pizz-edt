@@ -8,11 +8,14 @@ import { Play, Maximize, RefreshCw } from 'lucide-react';
 interface GameFrameProps {
   gameUrl: string;
   title: string;
+  coverImage: string;
 }
 
-export function GameFrame({ gameUrl, title }: GameFrameProps) {
+export function GameFrame({ gameUrl, title, coverImage }: GameFrameProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+
+
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -33,8 +36,19 @@ export function GameFrame({ gameUrl, title }: GameFrameProps) {
         {!isPlaying ? (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-700">
             <div className="text-center text-white">
-              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Play className="w-10 h-10 ml-1" />
+              <div className="relative mx-auto mb-6 group cursor-pointer overflow-hidden rounded-xl shadow-2xl border-2 border-white/20 transition-transform duration-300 group-hover:scale-105" onClick={handlePlay}>
+                <img
+                  src={coverImage}
+                  alt={title}
+                  className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-300"
+                  style={{ width: '240px' }}
+                />
+                <div className="absolute inset-0 bg-black/40 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="bg-white/90 rounded-full p-3 transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                    <Play className="w-8 h-8 text-blue-600 ml-1" />
+                  </div>
+                </div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300 -z-10"></div>
               </div>
               <h3 className="text-2xl font-bold mb-2">{title}</h3>
               <p className="text-blue-100 mb-6">Click to start playing!</p>

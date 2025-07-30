@@ -40,9 +40,15 @@
     <script type="text/javascript" src="assets/lib/dragonBones.min.js"></script>
     <!-- <script type="text/javascript" src="assets/lib/pksl.js"></script> -->
 
-<script type="text/javascript" src="motox3m.min.js"></script></body>
-<script src="/js/all.js"></script>
+<script type="text/javascript" src="motox3m.min.js"></script>
 
+<style id="antiClickjack">body{display:none !important;}</style>
+<script type="text/javascript">
+// 修改后的反点击劫持代码：允许在iframe中显示内容
+var antiClickjack = document.getElementById("antiClickjack");
+if (antiClickjack) {
+  antiClickjack.parentNode.removeChild(antiClickjack);
+}
+</script>
+</body>
 </html>
-
-<style id="antiClickjack">body{display:none !important;}</style><br><script type="text/javascript">if (self === top) { var antiClickjack = document.getElementById("antiClickjack"); antiClickjack.parentNode.removeChild(antiClickjack); } else { top.location = self.location; } </script>

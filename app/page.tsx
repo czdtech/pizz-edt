@@ -12,7 +12,7 @@ export default function Home() {
   const featuredGames = games.filter(game => game.featured);
   const allGames = [...games, ...additionalGames];
   const popularGames = allGames.slice(6, 24);
-  const newGames = allGames.slice(24, 42);
+  const newGames = allGames.slice(24, 36);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
