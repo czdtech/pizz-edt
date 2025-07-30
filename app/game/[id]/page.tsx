@@ -8,6 +8,7 @@ import { games, additionalGames } from '@/data/games';
 import { notFound } from 'next/navigation';
 import { Star, Users, Share2, Heart } from 'lucide-react';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 // Helper function to format tips into a list
 const formatTips = (tips: string) => {
@@ -33,6 +34,85 @@ interface GamePageProps {
   };
 }
 
+// Generate dynamic metadata for each game
+export async function generateMetadata({ params }: GamePageProps): Promise<Metadata> {
+  const allGames = [...games, ...additionalGames];
+  const game = allGames.find(g => g.id === params.id);
+
+  if (!game) {
+    return {
+      title: 'Game Not Found - Pizza Edition',
+      description: 'The requested game could not be found on Pizza Edition.',
+    };
+  }
+
+  const gameTitle = `${game.title} - Play Free Online`;
+  const gameDescription = game.gameInfo?.overview
+    ? `${game.description} ${game.gameInfo.overview.substring(0, 100)}...`
+    : game.description;
+
+  return {
+    title: gameTitle,
+    description: gameDescription,
+    keywords: [
+      game.title.toLowerCase(),
+      'free online game',
+      'html5 game',
+      'browser game',
+      game.category,
+      ...(game.tags || []),
+      'pizza edition',
+      'play online',
+      'no download'
+    ].join(', '),
+    authors: [{ name: 'Pizza Edition Team' }],
+    creator: 'Pizza Edition',
+    publisher: 'Pizza Edition',
+    category: game.category,
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: `https://pizzaedition.com/game/${game.id}`,
+      title: `${game.title} - Play Free Online | Pizza Edition`,
+      description: gameDescription,
+      siteName: 'Pizza Edition',
+      images: [
+        {
+          url: game.coverImage.startsWith('/')
+            ? `https://pizzaedition.com${game.coverImage}`
+            : game.coverImage,
+          width: 400,
+          height: 300,
+          alt: `${game.title} - Free Online Game`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${game.title} - Play Free Online | Pizza Edition`,
+      description: gameDescription,
+      creator: '@pizzaedition',
+      images: [game.coverImage.startsWith('/')
+        ? `https://pizzaedition.com${game.coverImage}`
+        : game.coverImage],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: `https://pizzaedition.com/game/${game.id}`,
+    },
+  };
+}
+
 export default function GamePage({ params }: GamePageProps) {
   const allGames = [...games, ...additionalGames];
   const game = allGames.find(g => g.id === params.id);
@@ -45,9 +125,53 @@ export default function GamePage({ params }: GamePageProps) {
     .filter(g => g.category === game.category && g.id !== game.id)
     .slice(0, 3);
 
+  // Generate JSON-LD structured data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: game.title,
+    description: game.description,
+    image: game.coverImage.startsWith('/')
+      ? `https://pizzaedition.com${game.coverImage}`
+      : game.coverImage,
+    url: `https://pizzaedition.com/game/${game.id}`,
+    genre: game.category,
+    keywords: game.tags?.join(', '),
+    aggregateRating: game.rating ? {
+      '@type': 'AggregateRating',
+      ratingValue: game.rating,
+      ratingCount: Math.floor((game.plays || 1000) / 10),
+      bestRating: 5,
+      worstRating: 1
+    } : undefined,
+    interactionStatistic: {
+      '@type': 'InteractionCounter',
+      interactionType: 'https://schema.org/PlayAction',
+      userInteractionCount: game.plays || 1000
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Pizza Edition',
+      url: 'https://pizzaedition.com'
+    },
+    applicationCategory: 'Game',
+    operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock'
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <Navbar />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <Navbar />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -263,7 +387,8 @@ export default function GamePage({ params }: GamePageProps) {
       </div>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }
 

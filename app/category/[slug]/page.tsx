@@ -2,8 +2,9 @@ import { Navbar } from '@/components/Navbar';
 import { GameCard } from '@/components/GameCard';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
-import { games, categories } from '@/data/games';
+import { games, categories, additionalGames } from '@/data/games';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 
 interface CategoryPageProps {
   params: {
@@ -11,14 +12,97 @@ interface CategoryPageProps {
   };
 }
 
+// Generate dynamic metadata for each category
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const category = categories.find(cat => cat.slug === params.slug);
+
+  if (!category) {
+    return {
+      title: 'Category Not Found - Pizza Edition',
+      description: 'The requested game category could not be found on Pizza Edition.',
+    };
+  }
+
+  const allGames = [...games, ...additionalGames];
+  const categoryGames = allGames.filter(game => game.category === params.slug);
+  const gameCount = categoryGames.length;
+
+  const categoryTitle = `${category.name} Games`;
+  const categoryDescription = `Play ${gameCount} free ${category.name.toLowerCase()} games online! ${category.description} All games are HTML5 and work in your browser - no downloads required.`;
+
+  // Get some popular games from this category for keywords
+  const popularGames = categoryGames
+    .sort((a, b) => (b.plays || 0) - (a.plays || 0))
+    .slice(0, 5)
+    .map(game => game.title.toLowerCase());
+
+  return {
+    title: categoryTitle,
+    description: categoryDescription,
+    keywords: [
+      `${category.name.toLowerCase()} games`,
+      'free online games',
+      'html5 games',
+      'browser games',
+      'no download games',
+      'pizza edition',
+      ...popularGames,
+      `play ${category.name.toLowerCase()} games`,
+      `${category.name.toLowerCase()} games online`,
+      'instant play games'
+    ].join(', '),
+    authors: [{ name: 'Pizza Edition Team' }],
+    creator: 'Pizza Edition',
+    publisher: 'Pizza Edition',
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: `https://pizzaedition.com/category/${params.slug}`,
+      title: `${category.name} Games - Play ${gameCount} Free ${category.name} Games | Pizza Edition`,
+      description: categoryDescription,
+      siteName: 'Pizza Edition',
+      images: [
+        {
+          url: `https://pizzaedition.com/category-${params.slug}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${category.name} Games - Pizza Edition`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${category.name} Games - Play ${gameCount} Free ${category.name} Games | Pizza Edition`,
+      description: categoryDescription,
+      creator: '@pizzaedition',
+      images: [`https://pizzaedition.com/category-${params.slug}.jpg`],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: `https://pizzaedition.com/category/${params.slug}`,
+    },
+  };
+}
+
 export default function CategoryPage({ params }: CategoryPageProps) {
   const category = categories.find(cat => cat.slug === params.slug);
-  
+
   if (!category) {
     notFound();
   }
 
-  const categoryGames = games.filter(game => game.category === params.slug);
+  const allGames = [...games, ...additionalGames];
+  const categoryGames = allGames.filter(game => game.category === params.slug);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
