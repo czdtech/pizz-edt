@@ -18,7 +18,6 @@
     <meta property="og:type" content="game" />
     <meta property="og:site_name" content="Cut the Rope" />
 
-
 	<script type="text/javascript" src="scripts/detectmobilebrowser.js" ></script>
     <link href="css/ctr.css?438" rel="stylesheet" type="text/css">
     <script src="scripts/sm2.js?438" type="text/javascript"></script>
@@ -206,123 +205,11 @@
 
   </div>
 
-<style>
-/* 强制显示所有被hideBeforeLoad隐藏的元素 */
-.hideBeforeLoad {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* 确保游戏区域始终可见 */
-#gameArea {
-  display: block !important;
-  visibility: visible !important;
-}
-
-/* 确保body始终可见 */
-body {
-  display: block !important;
-  visibility: visible !important;
-}
-</style>
-
-<script type="text/javascript">
-// 终极显示保障 - 通过CSS和JavaScript双重保险确保游戏可见
-(function() {
-  'use strict';
-
-  // 立即强制显示函数
-  function forceShowGame() {
-    // 确保body可见
-    if (document.body) {
-      document.body.style.display = 'block';
-      document.body.style.visibility = 'visible';
-    }
-
-    // 强制显示所有hideBeforeLoad元素
-    var hiddenElements = document.querySelectorAll('.hideBeforeLoad');
-    for (var i = 0; i < hiddenElements.length; i++) {
-      var element = hiddenElements[i];
-      element.style.display = 'block';
-      element.style.visibility = 'visible';
-      element.style.opacity = '1';
-      element.classList.remove('hideBeforeLoad');
-    }
-
-    // 确保游戏区域可见
-    var gameArea = document.getElementById('gameArea');
-    if (gameArea) {
-      gameArea.style.display = 'block';
-      gameArea.style.visibility = 'visible';
-      gameArea.classList.remove('hideBeforeLoad');
-    }
-  }
-
-  // 立即执行
-  forceShowGame();
-
-  // 在不同时机多次执行以确保万无一失
-  setTimeout(forceShowGame, 0);
-  setTimeout(forceShowGame, 100);
-  setTimeout(forceShowGame, 500);
-  setTimeout(forceShowGame, 1000);
-  setTimeout(forceShowGame, 2000);
-
-  // DOM就绪时执行
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', forceShowGame);
-  } else {
-    forceShowGame();
-  }
-
-  // 页面加载完成时执行
-  window.addEventListener('load', forceShowGame);
-
-  // 实时监控并修复任何被隐藏的元素
-  if (window.MutationObserver) {
-    var observer = new MutationObserver(function(mutations) {
-      var needsUpdate = false;
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          var target = mutation.target;
-          if (target.classList && target.classList.contains('hideBeforeLoad')) {
-            needsUpdate = true;
-          }
-        } else if (mutation.type === 'childList') {
-          for (var i = 0; i < mutation.addedNodes.length; i++) {
-            var node = mutation.addedNodes[i];
-            if (node.nodeType === 1 && node.classList && node.classList.contains('hideBeforeLoad')) {
-              needsUpdate = true;
-            }
-          }
-        }
-      });
-
-      if (needsUpdate) {
-        setTimeout(forceShowGame, 10);
-      }
-    });
-
-    // 开始观察整个文档
-    observer.observe(document.documentElement, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      attributeFilter: ['class', 'style']
-    });
-  }
-
-  // 定期检查并修复
-  setInterval(function() {
-    var hiddenElements = document.querySelectorAll('.hideBeforeLoad');
-    if (hiddenElements.length > 0) {
-      forceShowGame();
-    }
-  }, 1000);
-
-})();
-</script>
 
 </body>
 </html>
+
+<style id="antiClickjack">body{display:none !important;}</style>
+<br>
+<script type="text/javascript">
+ if (self === top) { var antiClickjack = document.getElementById("antiClickjack"); antiClickjack.parentNode.removeChild(antiClickjack); } else { top.location = self.location; } </script>
