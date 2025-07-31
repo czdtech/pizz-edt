@@ -2,6 +2,7 @@ import { Navbar } from '@/components/Navbar';
 import { GameCard } from '@/components/GameCard';
 import { CategoryCard } from '@/components/CategoryCard';
 import { Footer } from '@/components/Footer';
+import { GeometricBackground } from '@/components/GeometricBackground';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { games, categories, additionalGames } from '@/data/games';
@@ -15,19 +16,21 @@ export default function Home() {
   const newGames = allGames.slice(24, 36);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <Navbar />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 relative">
+      <GeometricBackground />
+      <div className="relative z-10">
+        <Navbar />
       
       {/* Featured Games */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4">
-              <Star className="w-8 h-8 text-yellow-500 mr-2" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Featured Games</h2>
+              <Star className="w-8 h-8 text-yellow-400 mr-2" />
+              <h2 className="text-3xl md:text-4xl font-bold text-white font-nunito">Featured Games</h2>
             </div>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Hand-picked games that offer the best gaming experience. Updated regularly with new favorites!
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              Hand-picked games that offer the best gaming experience on Pizza Edition. Updated regularly with new favorites!
             </p>
           </div>
           
@@ -40,12 +43,12 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-slate-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Game Categories</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Explore our diverse collection of games organized by genre. Find your favorite type of game and discover new challenges!
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-nunito">Game Categories</h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              Explore Pizza Edition's diverse collection of games organized by genre. Find your favorite type of game and discover new challenges!
             </p>
           </div>
           
@@ -58,15 +61,15 @@ export default function Home() {
       </section>
 
       {/* Popular Games */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-slate-700/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4">
-              <TrendingUp className="w-8 h-8 text-green-500 mr-2" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Popular This Week</h2>
+              <TrendingUp className="w-8 h-8 text-green-400 mr-2" />
+              <h2 className="text-3xl md:text-4xl font-bold text-white font-nunito">Popular This Week</h2>
             </div>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              See what other players are enjoying right now. These games are trending and loved by our community!
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              See what other players are enjoying right now. These games are trending and loved by the Pizza Edition community!
             </p>
           </div>
           
@@ -83,10 +86,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4">
-              <Zap className="w-8 h-8 text-purple-500 mr-2" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">New Arrivals</h2>
+              <Zap className="w-8 h-8 text-purple-400 mr-2" />
+              <h2 className="text-3xl md:text-4xl font-bold text-white font-nunito">New Arrivals</h2>
             </div>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
               Fresh games added to our collection. Be the first to discover these exciting new adventures!
             </p>
           </div>
@@ -97,6 +100,8 @@ export default function Home() {
             ))}
           </div>
           
+          {/* View All Games button - Commented out for future use */}
+          {/*
           <div className="text-center mt-12">
             <Link href="/games">
               <Button size="lg" className="rounded-full bg-blue-600 hover:bg-blue-700 px-8 py-4">
@@ -104,14 +109,15 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+          */}
         </div>
       </section>
 
       {/* Website Description */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-16 bg-slate-800/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-nunito">
               Pizza Edition - Your Ultimate Gaming Destination
             </h2>
             
@@ -122,7 +128,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">Instant Play</h3>
                 <p className="text-gray-600">
-                  No downloads, no installations. Click and play instantly in your browser with our HTML5 games.
+                  No downloads, no installations. Click and play instantly in your browser with Pizza Edition's HTML5 games.
                 </p>
               </div>
               
@@ -163,7 +169,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { Navbar } from '@/components/Navbar';
 import { GameFrame } from '@/components/GameFrame';
 import { GameCard } from '@/components/GameCard';
 import { Footer } from '@/components/Footer';
+import { GeometricBackground } from '@/components/GeometricBackground';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { games, additionalGames } from '@/data/games';
@@ -170,8 +171,10 @@ export default function GamePage({ params }: GamePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 relative">
+        <GeometricBackground />
+        <div className="relative z-10">
+          <Navbar />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -192,9 +195,9 @@ export default function GamePage({ params }: GamePageProps) {
                 )}
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{game.title}</h1>
-              
-              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 font-nunito">{game.title}</h1>
+
+              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-300 mb-4">
                 {game.rating && (
                   <div className="flex items-center space-x-1">
                     <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
@@ -212,11 +215,11 @@ export default function GamePage({ params }: GamePageProps) {
               </div>
 
               <div className="flex flex-wrap gap-3 mb-6">
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full border-gray-600 text-gray-300 hover:bg-gray-700">
                   <Heart className="w-4 h-4 mr-2" />
                   Add to Favorites
                 </Button>
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full border-gray-600 text-gray-300 hover:bg-gray-700">
                   <Share2 className="w-4 h-4 mr-2" />
                   Share Game
                 </Button>
@@ -384,9 +387,10 @@ export default function GamePage({ params }: GamePageProps) {
             )}
           </div>
         </div>
-      </div>
+        </div>
 
-      <Footer />
+          <Footer />
+        </div>
       </div>
     </>
   );

@@ -1,8 +1,9 @@
 import { Navbar } from '@/components/Navbar';
 import { GameCard } from '@/components/GameCard';
 import { Footer } from '@/components/Footer';
-import { Badge } from '@/components/ui/badge';
+import { GeometricBackground } from '@/components/GeometricBackground';
 import { games, categories, additionalGames } from '@/data/games';
+import { Zap, Puzzle, Target, Map, Car, Brain } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
@@ -101,35 +102,48 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
+  // Icon mapping for categories
+  const categoryIcons = {
+    action: Zap,
+    puzzle: Puzzle,
+    casual: Target,
+    adventure: Map,
+    racing: Car,
+    strategy: Brain,
+  };
+
   const allGames = [...games, ...additionalGames];
   const categoryGames = allGames.filter(game => game.category === params.slug);
+  const IconComponent = categoryIcons[category.slug as keyof typeof categoryIcons];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <Navbar />
-      
-      {/* Category Header */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-6xl mb-4">{category.icon}</div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{category.name} Games</h1>
-          <p className="text-xl text-blue-100 mb-6 max-w-2xl mx-auto">{category.description}</p>
-          <Badge className="bg-white/20 text-white hover:bg-white/30 rounded-full px-4 py-2 text-lg">
-            {categoryGames.length} games available
-          </Badge>
-        </div>
-      </section>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 relative">
+      <GeometricBackground />
+      <div className="relative z-10">
+        <Navbar />
 
-      {/* Games Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {categoryGames.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-              {categoryGames.map((game) => (
-                <GameCard key={game.id} game={game} />
-              ))}
-            </div>
-          ) : (
+        {/* Games Grid */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {categoryGames.length > 0 ? (
+              <>
+                <div className="text-center mb-12">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 font-nunito flex items-center justify-center space-x-3">
+                    <IconComponent className="w-8 h-8 md:w-10 md:h-10" />
+                    <span>{category.name} Games</span>
+                  </h1>
+                  <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                    {category.description} - {categoryGames.length} games available
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                  {categoryGames.map((game) => (
+                    <GameCard key={game.id} game={game} />
+                  ))}
+                </div>
+              </>
+            ) : (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🎮</div>
               <h3 className="text-2xl font-bold text-gray-800 mb-2">No games found</h3>
@@ -139,9 +153,10 @@ export default function CategoryPage({ params }: CategoryPageProps) {
             </div>
           )}
         </div>
-      </section>
+        </section>
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }

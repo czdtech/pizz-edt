@@ -1,36 +1,24 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Nunito } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
+const nunito = Nunito({
+  subsets: ['latin'],
+  variable: '--font-nunito',
+});
 
 export const metadata: Metadata = {
   title: {
     default: 'Pizza Edition - Free HTML5 Games Collection',
     template: '%s | Pizza Edition'
   },
-  description: 'Play 38+ free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, Temple Run 2, and more. No downloads required - just click and play!',
+  description: 'Play free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
   keywords: [
     'HTML5 games',
     'free online games',
     'browser games',
-    'no download games',
-    'pizza edition',
-    'among us online',
-    'fireboy watergirl',
-    'geometry dash',
-    'temple run 2',
-    'fruit ninja',
-    'rocket league',
-    '2048 game',
-    'casual games',
-    'puzzle games',
-    'action games',
-    'adventure games',
-    'racing games',
-    'strategy games',
-    'multiplayer games',
-    'instant play games'
+    'Pizza Edition'
   ].join(', '),
   authors: [{ name: 'Pizza Edition Team' }],
   creator: 'Pizza Edition',
@@ -51,7 +39,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://pizzaedition.com',
     title: 'Pizza Edition - Free HTML5 Games Collection',
-    description: 'Play 38+ free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, Temple Run 2, and more. No downloads required!',
+    description: 'Play free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
     siteName: 'Pizza Edition',
     images: [
       {
@@ -104,7 +92,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${nunito.variable}`}>{children}</body>
     </html>
   );
 }

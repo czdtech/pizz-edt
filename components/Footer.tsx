@@ -38,6 +38,8 @@ export function Footer() {
               <li><Link href="/category/puzzle" className="text-gray-400 hover:text-white transition-colors">Puzzle Games</Link></li>
               <li><Link href="/category/casual" className="text-gray-400 hover:text-white transition-colors">Casual Games</Link></li>
               <li><Link href="/category/adventure" className="text-gray-400 hover:text-white transition-colors">Adventure Games</Link></li>
+              <li><Link href="/category/racing" className="text-gray-400 hover:text-white transition-colors">Racing Games</Link></li>
+              <li><Link href="/category/strategy" className="text-gray-400 hover:text-white transition-colors">Strategy Games</Link></li>
             </ul>
           </div>
 
@@ -46,15 +48,17 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/trending" className="text-gray-400 hover:text-white transition-colors">Trending</Link></li>
               <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
               <li><Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Pizza Edition. All rights reserved. Built with ❤️ for gamers worldwide.</p>
+          <p>&copy; 2025 Pizza Edition. All rights reserved.</p>
         </div>
       </div>
     </footer>
