@@ -2,7 +2,6 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Nunito } from 'next/font/google';
 import { SITE_CONFIG } from '@/lib/site-config';
-import { PerformanceMonitor } from '@/components/PerformanceMonitor';
 
 const inter = Inter({ subsets: ['latin'] });
 const nunito = Nunito({
@@ -79,7 +78,7 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   other: {
-    'google-site-verification': 'your-google-verification-code',
+    'google-site-verification': 'your-google-verification-code ',
   },
 };
 
