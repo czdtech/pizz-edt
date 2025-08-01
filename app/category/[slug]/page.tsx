@@ -9,14 +9,15 @@ import { Metadata } from 'next';
 import { SITE_CONFIG } from '@/lib/site-config';
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate dynamic metadata for each category
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const category = categories.find(cat => cat.slug === params.slug);
+  const { slug } = await params;
+  const category = categories.find(cat => cat.slug === slug);
 
   if (!category) {
     return {
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   }
 
   const allGames = [...games, ...additionalGames];
-  const categoryGames = allGames.filter(game => game.category === params.slug);
+  const categoryGames = allGames.filter(game => game.category === slug);
   const gameCount = categoryGames.length;
 
   const categoryTitle = `${category.name} Games`;
@@ -59,13 +60,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     openGraph: {
       type: 'website',
       locale: 'en_US',
-      url: `${SITE_CONFIG.baseUrl}/category/${params.slug}`,
+      url: `${SITE_CONFIG.baseUrl}/category/${slug}`,
       title: `${category.name} Games - Play ${gameCount} Free ${category.name} Games | Pizza Edition`,
       description: categoryDescription,
       siteName: 'Pizza Edition',
       images: [
         {
-          url: `${SITE_CONFIG.baseUrl}/category-${params.slug}.jpg`,
+          url: `${SITE_CONFIG.baseUrl}/category-${slug}.jpg`,
           width: 1200,
           height: 630,
           alt: `${category.name} Games - Pizza Edition`,
@@ -77,7 +78,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       title: `${category.name} Games - Play ${gameCount} Free ${category.name} Games | Pizza Edition`,
       description: categoryDescription,
       creator: '@pizzaedition',
-      images: [`${SITE_CONFIG.baseUrl}/category-${params.slug}.jpg`],
+      images: [`${SITE_CONFIG.baseUrl}/category-${slug}.jpg`],
     },
     robots: {
       index: true,
@@ -91,13 +92,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       },
     },
     alternates: {
-      canonical: `${SITE_CONFIG.baseUrl}/category/${params.slug}`,
+      canonical: `${SITE_CONFIG.baseUrl}/category/${slug}`,
     },
   };
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const category = categories.find(cat => cat.slug === params.slug);
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = await params;
+  const category = categories.find(cat => cat.slug === slug);
 
   if (!category) {
     notFound();
@@ -114,7 +116,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   };
 
   const allGames = [...games, ...additionalGames];
-  const categoryGames = allGames.filter(game => game.category === params.slug);
+  const categoryGames = allGames.filter(game => game.category === slug);
   const IconComponent = categoryIcons[category.slug as keyof typeof categoryIcons];
 
   return (

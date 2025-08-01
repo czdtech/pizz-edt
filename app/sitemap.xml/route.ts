@@ -1,6 +1,8 @@
 import { SITE_CONFIG } from '@/lib/site-config';
 import { games, additionalGames, categories } from '@/data/games';
 
+export const dynamic = 'force-static';
+
 export function GET() {
   const allGames = [...games, ...additionalGames];
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format

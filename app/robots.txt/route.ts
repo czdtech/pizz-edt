@@ -1,5 +1,7 @@
 import { SITE_CONFIG } from '@/lib/site-config';
 
+export const dynamic = 'force-static';
+
 export function GET() {
   const robotsTxt = `# Robots.txt for Pizza Edition
 # ${SITE_CONFIG.baseUrl}/robots.txt

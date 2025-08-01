@@ -31,15 +31,16 @@ const formatFAQ = (faq: string) => {
 };
 
 interface GamePageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // Generate dynamic metadata for each game
 export async function generateMetadata({ params }: GamePageProps): Promise<Metadata> {
+  const { id } = await params;
   const allGames = [...games, ...additionalGames];
-  const game = allGames.find(g => g.id === params.id);
+  const game = allGames.find(g => g.id === id);
 
   if (!game) {
     return {
@@ -115,9 +116,10 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
   };
 }
 
-export default function GamePage({ params }: GamePageProps) {
+export default async function GamePage({ params }: GamePageProps) {
+  const { id } = await params;
   const allGames = [...games, ...additionalGames];
-  const game = allGames.find(g => g.id === params.id);
+  const game = allGames.find(g => g.id === id);
 
   if (!game) {
     notFound();

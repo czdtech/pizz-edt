@@ -6,13 +6,9 @@ import { games, categories, additionalGames } from '@/data/games';
 import { TrendingUp, Star, Zap } from 'lucide-react';
 
 // 动态导入非关键组件
-const Footer = dynamic(() => import('@/components/Footer').then(mod => ({ default: mod.Footer })), {
-  ssr: true,
-});
+const Footer = dynamic(() => import('@/components/Footer').then(mod => ({ default: mod.Footer })));
 
-const GeometricBackground = dynamic(() => import('@/components/GeometricBackground').then(mod => ({ default: mod.GeometricBackground })), {
-  ssr: false, // 背景动画不需要SSR
-});
+const GeometricBackground = dynamic(() => import('@/components/GeometricBackground').then(mod => ({ default: mod.GeometricBackground })));
 
 export default function Home() {
   const featuredGames = games.filter(game => game.featured);
