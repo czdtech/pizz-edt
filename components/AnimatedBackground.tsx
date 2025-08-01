@@ -38,13 +38,17 @@ export function AnimatedBackground() {
       rotationSpeed: number;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        // Use canvas dimensions safely with fallback values
+        const canvasWidth = canvas?.width || window.innerWidth;
+        const canvasHeight = canvas?.height || window.innerHeight;
+
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
         this.size = Math.random() * 4 + 2;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
         this.opacity = Math.random() * 0.3 + 0.1;
-        this.shape = ['circle', 'triangle', 'square', 'diamond'][Math.floor(Math.random() * 4)] as any;
+        this.shape = ['circle', 'triangle', 'square', 'diamond'][Math.floor(Math.random() * 4)] as 'circle' | 'triangle' | 'square' | 'diamond';
         this.color = this.getRandomColor();
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.02;
@@ -67,14 +71,18 @@ export function AnimatedBackground() {
         this.y += this.speedY;
         this.rotation += this.rotationSpeed;
 
-        // Wrap around edges
-        if (this.x > canvas.width + this.size) this.x = -this.size;
-        if (this.x < -this.size) this.x = canvas.width + this.size;
-        if (this.y > canvas.height + this.size) this.y = -this.size;
-        if (this.y < -this.size) this.y = canvas.height + this.size;
+        // Wrap around edges - use safe canvas dimensions
+        const canvasWidth = canvas?.width || window.innerWidth;
+        const canvasHeight = canvas?.height || window.innerHeight;
+
+        if (this.x > canvasWidth + this.size) this.x = -this.size;
+        if (this.x < -this.size) this.x = canvasWidth + this.size;
+        if (this.y > canvasHeight + this.size) this.y = -this.size;
+        if (this.y < -this.size) this.y = canvasHeight + this.size;
       }
 
       draw() {
+        if (!ctx) return;
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
@@ -126,6 +134,7 @@ export function AnimatedBackground() {
 
     // Animation loop
     const animate = () => {
+      if (!canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach(particle => {

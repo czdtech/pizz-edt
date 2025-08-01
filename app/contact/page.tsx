@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Mail, MessageSquare, Bug, Lightbulb, Heart, Clock, MapPin, Phone } from 'lucide-react';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: 'Contact Us - Pizza Edition',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Contact Pizza Edition - Get in Touch',
     description: 'Get in touch with the Pizza Edition team. Report bugs, suggest games, provide feedback, or ask questions.',
     type: 'website',
-    url: 'https://pizzaedition.com/contact',
+    url: `${SITE_CONFIG.baseUrl}/contact`,
   },
   twitter: {
     card: 'summary_large_image',

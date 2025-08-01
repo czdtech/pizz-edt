@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Eye, Lock, Cookie, UserCheck, Globe } from 'lucide-react';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - Pizza Edition',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Privacy Policy - Pizza Edition',
     description: 'Learn how Pizza Edition protects your privacy and handles your data.',
     type: 'website',
-    url: 'https://pizzaedition.com/privacy',
+    url: `${SITE_CONFIG.baseUrl}/privacy`,
   },
   twitter: {
     card: 'summary_large_image',

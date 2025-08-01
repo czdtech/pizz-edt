@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileText, Users, Shield, AlertTriangle, Scale, Globe } from 'lucide-react';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: 'Terms of Service - Pizza Edition',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Terms of Service - Pizza Edition',
     description: 'Read the terms of service for Pizza Edition. Understand your rights and responsibilities.',
     type: 'website',
-    url: 'https://pizzaedition.com/terms',
+    url: `${SITE_CONFIG.baseUrl}/terms`,
   },
   twitter: {
     card: 'summary_large_image',

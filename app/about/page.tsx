@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Gamepad2, Users, Zap, Star, Globe, Heart, Shield, Rocket } from 'lucide-react';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: 'About Us - Pizza Edition',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'About Pizza Edition - Free HTML5 Games Platform',
     description: 'Learn about Pizza Edition, your ultimate destination for free HTML5 games. Discover our mission, values, and commitment to providing the best gaming experience.',
     type: 'website',
-    url: 'https://pizzaedition.com/about',
+    url: `${SITE_CONFIG.baseUrl}/about`,
   },
   twitter: {
     card: 'summary_large_image',

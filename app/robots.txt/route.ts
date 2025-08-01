@@ -1,5 +1,8 @@
-# Robots.txt for Pizza Edition
-# https://pizzaedition.com/robots.txt
+import { SITE_CONFIG } from '@/lib/site-config';
+
+export function GET() {
+  const robotsTxt = `# Robots.txt for Pizza Edition
+# ${SITE_CONFIG.baseUrl}/robots.txt
 
 User-agent: *
 Allow: /
@@ -37,4 +40,11 @@ Allow: /icons/
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://pizzaedition.com/sitemap.xml
+Sitemap: ${SITE_CONFIG.baseUrl}/sitemap.xml`;
+
+  return new Response(robotsTxt, {
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+  });
+}

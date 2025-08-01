@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Nunito } from 'next/font/google';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 const inter = Inter({ subsets: ['latin'] });
 const nunito = Nunito({
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     default: 'Pizza Edition - No Ads Games Ad Free HTML5 Games',
     template: '%s | Pizza Edition'
   },
-  description: 'Play free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
+  description: 'Play Pizza Edition No Ads Games and free in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
   keywords: [
     'HTML5 games',
     'free online games',
@@ -30,20 +31,20 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://pizzaedition.com'),
+  metadataBase: new URL(SITE_CONFIG.baseUrl),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://pizzaedition.com',
+    url: SITE_CONFIG.baseUrl,
     title: 'Pizza Edition - Free HTML5 Games Collection',
-    description: 'Play free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
+    description: 'Play Pizza Edition No Ads Games and free in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
     siteName: 'Pizza Edition',
     images: [
       {
-        url: 'https://pizzaedition.com/og-image.jpg',
+        url: `${SITE_CONFIG.baseUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: 'Pizza Edition - Free HTML5 Games Collection',
@@ -53,9 +54,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pizza Edition - Free HTML5 Games Collection',
-    description: 'Play 38+ free HTML5 games instantly in your browser! No downloads required - just click and play!',
+    description: 'Play Pizza Edition No Ads Games and free in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
     creator: '@pizzaedition',
-    images: ['https://pizzaedition.com/twitter-image.jpg'],
+    images: [`${SITE_CONFIG.baseUrl}/twitter-image.jpg`],
   },
   robots: {
     index: true,

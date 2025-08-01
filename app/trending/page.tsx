@@ -4,16 +4,17 @@ import { Footer } from '@/components/Footer';
 import { GeometricBackground } from '@/components/GeometricBackground';
 import { games, additionalGames } from '@/data/games';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Trending Games - Pizza Edition',
+  title: 'Trending Games',
   description: 'Discover the hottest and most popular games on Pizza Edition. Play trending HTML5 games that everyone is talking about.',
   keywords: 'trending games, popular games, hot games, featured games, Pizza Edition, HTML5 games',
   openGraph: {
     title: 'Trending Games',
     description: 'Discover the hottest and most popular games on Pizza Edition. Play trending HTML5 games that everyone is talking about.',
     type: 'website',
-    url: 'https://pizzaedition.com/trending',
+    url: `${SITE_CONFIG.baseUrl}/trending`,
   },
   twitter: {
     card: 'summary_large_image',

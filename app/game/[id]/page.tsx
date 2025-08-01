@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { Star, Users, Share2, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 // Helper function to format tips into a list
 const formatTips = (tips: string) => {
@@ -73,14 +74,14 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
     openGraph: {
       type: 'website',
       locale: 'en_US',
-      url: `https://pizzaedition.com/game/${game.id}`,
+      url: `${SITE_CONFIG.baseUrl}/game/${game.id}`,
       title: `${game.title} - Play Free Online | Pizza Edition`,
       description: gameDescription,
       siteName: 'Pizza Edition',
       images: [
         {
           url: game.coverImage.startsWith('/')
-            ? `https://pizzaedition.com${game.coverImage}`
+            ? `${SITE_CONFIG.baseUrl}${game.coverImage}`
             : game.coverImage,
           width: 400,
           height: 300,
@@ -94,7 +95,7 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       description: gameDescription,
       creator: '@pizzaedition',
       images: [game.coverImage.startsWith('/')
-        ? `https://pizzaedition.com${game.coverImage}`
+        ? `${SITE_CONFIG.baseUrl}${game.coverImage}`
         : game.coverImage],
     },
     robots: {
@@ -109,7 +110,7 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       },
     },
     alternates: {
-      canonical: `https://pizzaedition.com/game/${game.id}`,
+      canonical: `${SITE_CONFIG.baseUrl}/game/${game.id}`,
     },
   };
 }
@@ -133,9 +134,9 @@ export default function GamePage({ params }: GamePageProps) {
     name: game.title,
     description: game.description,
     image: game.coverImage.startsWith('/')
-      ? `https://pizzaedition.com${game.coverImage}`
+      ? `${SITE_CONFIG.baseUrl}${game.coverImage}`
       : game.coverImage,
-    url: `https://pizzaedition.com/game/${game.id}`,
+    url: `${SITE_CONFIG.baseUrl}/game/${game.id}`,
     genre: game.category,
     keywords: game.tags?.join(', '),
     aggregateRating: game.rating ? {
@@ -153,7 +154,7 @@ export default function GamePage({ params }: GamePageProps) {
     publisher: {
       '@type': 'Organization',
       name: 'Pizza Edition',
-      url: 'https://pizzaedition.com'
+      url: SITE_CONFIG.baseUrl
     },
     applicationCategory: 'Game',
     operatingSystem: 'Web Browser',

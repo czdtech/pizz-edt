@@ -6,6 +6,7 @@ import { games, categories, additionalGames } from '@/data/games';
 import { Zap, Puzzle, Target, Map, Car, Brain } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 interface CategoryPageProps {
   params: {
@@ -64,7 +65,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       siteName: 'Pizza Edition',
       images: [
         {
-          url: `https://pizzaedition.com/category-${params.slug}.jpg`,
+          url: `${SITE_CONFIG.baseUrl}/category-${params.slug}.jpg`,
           width: 1200,
           height: 630,
           alt: `${category.name} Games - Pizza Edition`,
@@ -76,7 +77,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       title: `${category.name} Games - Play ${gameCount} Free ${category.name} Games | Pizza Edition`,
       description: categoryDescription,
       creator: '@pizzaedition',
-      images: [`https://pizzaedition.com/category-${params.slug}.jpg`],
+      images: [`${SITE_CONFIG.baseUrl}/category-${params.slug}.jpg`],
     },
     robots: {
       index: true,
@@ -90,7 +91,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       },
     },
     alternates: {
-      canonical: `https://pizzaedition.com/category/${params.slug}`,
+      canonical: `${SITE_CONFIG.baseUrl}/category/${params.slug}`,
     },
   };
 }
