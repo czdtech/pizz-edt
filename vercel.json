@@ -1,0 +1,5 @@
+# Override Vercel detection - force standard Next.js deployment
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs"
+}
