@@ -1,0 +1,6 @@
+# Ignore static export output directory
+out/
+# Ignore build artifacts that might confuse Vercel
+.next/static/chunks/pages/
+build/
+dist/
