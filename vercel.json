@@ -1,16 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "out",
-  "framework": "nextjs",
   "regions": ["iad1"],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "build": {
-    "env": {
-      "NODE_VERSION": "18"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -51,13 +42,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "app/robots.txt/route.ts": {
-      "maxDuration": 10
-    },
-    "app/sitemap.xml/route.ts": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
