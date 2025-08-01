@@ -7,7 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { categories } from '@/data/games';
 
-export function Navbar() {
+interface NavbarProps {
+  showH1?: boolean; // 是否在首页显示H1标签
+}
+
+export function Navbar({ showH1 = false }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -30,7 +34,11 @@ export function Navbar() {
             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center shadow-lg">
               <Gamepad2 className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-800 hidden sm:block font-nunito">Pizza Edition</span>
+            {showH1 ? (
+              <h1 className="text-xl font-bold text-gray-800 hidden sm:block font-nunito">Pizza Edition</h1>
+            ) : (
+              <span className="text-xl font-bold text-gray-800 hidden sm:block font-nunito">Pizza Edition</span>
+            )}
           </Link>
 
           {/* Desktop Navigation */}

@@ -19,7 +19,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 relative">
       <GeometricBackground />
       <div className="relative z-10">
-        <Navbar />
+        <Navbar showH1={true} />
       
       {/* Featured Games */}
       <section className="py-16">
