@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     openGraph: {
       type: 'website',
       locale: 'en_US',
-      url: `https://pizzaedition.com/category/${params.slug}`,
+      url: `${SITE_CONFIG.baseUrl}/category/${params.slug}`,
       title: `${category.name} Games - Play ${gameCount} Free ${category.name} Games | Pizza Edition`,
       description: categoryDescription,
       siteName: 'Pizza Edition',
