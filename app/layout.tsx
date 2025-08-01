@@ -10,7 +10,7 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Pizza Edition - Free HTML5 Games Collection',
+    default: 'Pizza Edition - No Ads Games Ad Free HTML5 Games',
     template: '%s | Pizza Edition'
   },
   description: 'Play free HTML5 games instantly in your browser! Featuring popular games like Among Us, Fireboy and Watergirl, Geometry Dash, and more.',
