@@ -40,7 +40,7 @@ function getBaseUrl(): string {
   }
 
   // 5. Fallback to default
-  return 'https://pizzaedition.com';
+  return 'http://127.0.0.1';
 }
 
 export const SITE_CONFIG = {
