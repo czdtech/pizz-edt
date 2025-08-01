@@ -1,5 +1,6 @@
 {
   "buildCommand": "npm run build",
+  "outputDirectory": "out",
   "regions": ["iad1"],
   "headers": [
     {
@@ -33,7 +34,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)",
+      "source": "/(.*)\\.(.+)",
       "headers": [
         {
           "key": "Cache-Control",
