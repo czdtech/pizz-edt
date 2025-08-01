@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Nunito } from 'next/font/google';
 import { SITE_CONFIG } from '@/lib/site-config';
+import { PerformanceMonitor } from '@/components/PerformanceMonitor';
 
 const inter = Inter({ subsets: ['latin'] });
 const nunito = Nunito({

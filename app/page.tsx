@@ -1,13 +1,18 @@
+import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/Navbar';
 import { GameCard } from '@/components/GameCard';
 import { CategoryCard } from '@/components/CategoryCard';
-import { Footer } from '@/components/Footer';
-import { GeometricBackground } from '@/components/GeometricBackground';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { games, categories, additionalGames } from '@/data/games';
 import { TrendingUp, Star, Zap } from 'lucide-react';
-import Link from 'next/link';
+
+// 动态导入非关键组件
+const Footer = dynamic(() => import('@/components/Footer').then(mod => ({ default: mod.Footer })), {
+  ssr: true,
+});
+
+const GeometricBackground = dynamic(() => import('@/components/GeometricBackground').then(mod => ({ default: mod.GeometricBackground })), {
+  ssr: false, // 背景动画不需要SSR
+});
 
 export default function Home() {
   const featuredGames = games.filter(game => game.featured);
