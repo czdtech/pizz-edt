@@ -1,13 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Nunito } from 'next/font/google';
 import { SITE_CONFIG } from '@/lib/site-config';
-
-const inter = Inter({ subsets: ['latin'] });
-const nunito = Nunito({
-  subsets: ['latin'],
-  variable: '--font-nunito',
-});
 
 export const metadata: Metadata = {
   title: {
@@ -92,8 +85,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${inter.className} ${nunito.variable}`}>{children}</body>
+      <body className="font-inter">{children}</body>
     </html>
   );
 }
